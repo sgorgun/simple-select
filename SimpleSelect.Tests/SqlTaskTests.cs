@@ -93,7 +93,7 @@ namespace SimpleSelect.Tests
         }
 
         [Test]
-        public void SelectQuery_ContainsCorrectStatements([Range(1, FilesCount)] int index)
+        public void SelectQuery_ContainsSelectFrom([Range(1, FilesCount)] int index)
         {
             var actual = Queries[index - 1];
             Assert.IsTrue(SelectHelper.ContainsSelectDistinctFrom(actual), "Query should contain 'SELECT' and 'FROM' statements.");

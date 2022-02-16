@@ -33,26 +33,27 @@ namespace SimpleSelect.Tests
         }
 
         [Test]
-        public void FileWithQueries_Exists([Range(0, FilesCount - 1)] int index)
+        public void FileWithQueries_Exists([Range(1, FilesCount)] int index)
         {
-            AssertFileExist(index);
+            AssertFileExist(index - 1);
         }
 
         [Test]
-        public void FileWithQueries_NotEmpty([Range(0, FilesCount - 1)] int index)
+        public void FileWithQueries_NotEmpty([Range(1, FilesCount)] int index)
         {
-            AssertFileNotEmpty(index);
+            AssertFileNotEmpty(index - 1);
         }
 
         [Test]
-        public void AllInsertQueries_ExecuteSuccessfully([Range(0, FilesCount - 1)] int index)
+        public void AllInsertQueries_ExecuteSuccessfully([Range(1, FilesCount)] int index)
         {
-            AssertData(index);
+            AssertData(index - 1);
         }
 
         [Test]
-        public void SelectQuery_ReturnsCorrectRowsCount([Range(0, FilesCount - 1)] int index)
+        public void SelectQuery_ReturnsCorrectRowsCount([Range(1, FilesCount)] int index)
         {
+            index -= 1;
             AssertData(index);
             var expected = ExpectedResults[index].Data.Length;
             var actual = ActualResults[index].Data.Length;
@@ -60,8 +61,9 @@ namespace SimpleSelect.Tests
         }
 
         [Test]
-        public void SelectQuery_ReturnsCorrectSchema([Range(0, FilesCount - 1)] int index)
+        public void SelectQuery_ReturnsCorrectSchema([Range(1, FilesCount)] int index)
         {
+            index -= 1;
             AssertData(index);
             var expected = ExpectedResults[index].Schema;
             var actual = ActualResults[index].Schema;
@@ -71,8 +73,9 @@ namespace SimpleSelect.Tests
         }
 
         [Test]
-        public void SelectQuery_ReturnsCorrectTypes([Range(0, FilesCount - 1)] int index)
+        public void SelectQuery_ReturnsCorrectTypes([Range(1, FilesCount)] int index)
         {
+            index -= 1;
             AssertData(index);
             var expected = ExpectedResults[index].Types;
             var actual = ActualResults[index].Types;
@@ -82,8 +85,9 @@ namespace SimpleSelect.Tests
         }
 
         [Test]
-        public void SelectQuery_ReturnsCorrectData([Range(0, FilesCount - 1)] int index)
+        public void SelectQuery_ReturnsCorrectData([Range(1, FilesCount)] int index)
         {
+            index -= 1;
             AssertData(index);
             var expected = ExpectedResults[index].Data;
             var actual = ActualResults[index].Data;

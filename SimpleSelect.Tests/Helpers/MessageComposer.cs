@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace SqlDataInsert.Tests.Helpers
+namespace SimpleSelect.Tests.Helpers
 {
     internal class MessageComposer
     {

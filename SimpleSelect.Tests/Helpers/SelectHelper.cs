@@ -1,13 +1,26 @@
 ﻿using Microsoft.Data.Sqlite;
-using SqlDataInsert.Tests.Models;
+using SimpleSelect.Tests.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 
-namespace SqlDataInsert.Tests.Helpers
+namespace SimpleSelect.Tests.Helpers
 {
     internal class SelectHelper
     {
+        private static readonly Regex SelectDistinctFrom_Regex = new Regex(@"\s*SELECT\s+(DISTINCT\s+)*((\w+(\.\w+)*(\s+AS\s+((\w+)|('\w+')))*)|(\*))(\s*[\S\s][^;]*\s+FROM\s+\w+)");
+        private static readonly Regex SelectFromAggregate_Regex = new Regex(@"\s*SELECT\s+((COUNT)|(AVG)|(SUM)|(MIN)|(MAX))(\s+DISTINCT)*\s*\(\s*((\w+)|(\*))\s*\)(\s+AS\s+((\w+)|('\w+')*)|(\*))*(\s*[\S\s][^;]*\s+FROM\s+\w+)");
+        private static readonly Regex InnerJoin_Regex = new Regex(@"\s*INNER\s+JOIN\s+([\s\w]+ON){1}\s+([\s\.\w]*[^=]){1}\s*=");
+        private static readonly Regex OrderBy_Regex = new Regex(@"ORDER\s+BY\s+\w+");
+        private static readonly Regex GroupBy_Regex = new Regex(@"GROUP\s+BY\s+\w+");
+
+        public static bool ContainsSelectDistinctFrom(string query) => SelectDistinctFrom_Regex.IsMatch(query);
+        public static bool ContainsSelectFromAggregate(string query) => SelectFromAggregate_Regex.IsMatch(query);
+        public static bool ContainsInnerJoin(string query) => InnerJoin_Regex.IsMatch(query);
+        public static bool ContainsOrderBy(string query) => OrderBy_Regex.IsMatch(query);
+        public static bool ContainsGroupBy(string query) => GroupBy_Regex.IsMatch(query);
+
         public static SelectResult[] GetResults(IEnumerable<string> queries)
         {
             var results = new List<SelectResult>();

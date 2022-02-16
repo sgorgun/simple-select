@@ -1,10 +1,10 @@
 ﻿using NUnit.Framework;
-using SqlDataInsert.Tests.Helpers;
+using SimpleSelect.Tests.Helpers;
 using System;
-using SqlDataInsert.Tests.Models;
+using SimpleSelect.Tests.Models;
 using System.IO;
 
-namespace SqlDataInsert.Tests
+namespace SimpleSelect.Tests
 {
     [TestFixture]
     public class SqlTaskTests
@@ -90,6 +90,20 @@ namespace SqlDataInsert.Tests
             var expectedMessage = MessageComposer.Compose(ExpectedResults[index].Schema, expected);
             var actualMessage = MessageComposer.Compose(ActualResults[index].Schema, actual);
             Assert.AreEqual(expected, actual, "\nExpected:\n{0}\n\nActual:\n{1}\n", expectedMessage, actualMessage);
+        }
+
+        [Test]
+        public void SelectQuery_ContainsCorrectStatements([Range(1, FilesCount)] int index)
+        {
+            var actual = Queries[index - 1];
+            Assert.IsTrue(SelectHelper.ContainsSelectDistinctFrom(actual), "Query should contain 'SELECT' and 'FROM' statements.");
+        }
+
+        [Test]
+        public void SelectQuery_ContainsOrderBy([Range(1, FilesCount)] int index)
+        {
+            var actual = Queries[index - 1];
+            Assert.IsTrue(SelectHelper.ContainsOrderBy(actual), "Query should contains 'ORDER BY' statement.");
         }
 
         private static void AssertData(int index)

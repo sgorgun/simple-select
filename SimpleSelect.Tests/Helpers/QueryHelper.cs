@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace SqlDataInsert.Tests.Helpers
+namespace SimpleSelect.Tests.Helpers
 {
     internal static class QueryHelper
     {

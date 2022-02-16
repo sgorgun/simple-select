@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 
-namespace SqlDataInsert
+namespace SimpleSelect
 {
     public static class SqlTask
     {

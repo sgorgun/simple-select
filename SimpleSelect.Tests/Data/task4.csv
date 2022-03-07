@@ -1,4 +1,4 @@
-name,surname,birth_date
-CHAR,CHAR,DATE
-Yeva,Krasivaya,1992-08-08
-Bohdan,Krasov,1965-10-11
+name,surname
+CHAR,CHAR
+Yeva,Krasivaya
+Bohdan,Krasov

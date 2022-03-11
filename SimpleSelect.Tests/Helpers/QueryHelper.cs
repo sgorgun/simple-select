@@ -3,13 +3,12 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace SimpleSelect.Tests.Helpers
+namespace AutocodeDB.Helpers
 {
     internal static class QueryHelper
     {
-        private const string BlockComments = @"/\*(.*?)\*/";
+        private const string BlockComments = @"/\*.*\*/";//@"/\*(.*?)\*/";
         private const string LineComments = @"--(.*$?)";
-
         public static string GetQuery(string file)
         {
             if (!File.Exists(file))
@@ -30,8 +29,11 @@ namespace SimpleSelect.Tests.Helpers
 
         public static string[] GetQueries(string[] files)
         {
+            StreamWriter writer = new StreamWriter("log.txt", true);
             for (int i = 0; i < files.Length; i++)
+            {
                 files[i] = GetQuery(files[i]);
+            }
             return files;
         }
 
@@ -46,10 +48,10 @@ namespace SimpleSelect.Tests.Helpers
             return ComposeErrorMessage(query, null, message);
         }
 
-        private static string RemoveComments(string rawData)
+        public static string RemoveComments(string rawData)
         {
-            rawData = Regex.Replace(rawData, LineComments, "");
-            rawData = Regex.Replace(rawData, BlockComments, "", RegexOptions.Multiline);
+            rawData = Regex.Replace(rawData, LineComments, "", RegexOptions.Multiline);
+            rawData = Regex.Replace(rawData, BlockComments, "", RegexOptions.Singleline);
             rawData = Regex.Replace(rawData, @"\s+", " ");
             return rawData;
         }

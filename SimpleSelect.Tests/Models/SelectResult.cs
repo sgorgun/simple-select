@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace SimpleSelect.Tests.Models
+namespace AutocodeDB.Models
 {
     public class SelectResult
     {

@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
-using SimpleSelect.Tests.Helpers;
+using AutocodeDB.Helpers;
 using System;
-using SimpleSelect.Tests.Models;
+using AutocodeDB.Models;
 using System.IO;
 
 namespace SimpleSelect.Tests

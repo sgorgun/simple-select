@@ -1,11 +1,11 @@
 ﻿using Microsoft.Data.Sqlite;
-using SimpleSelect.Tests.Models;
+using AutocodeDB.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace SimpleSelect.Tests.Helpers
+namespace AutocodeDB.Helpers
 {
     internal class SelectHelper
     {

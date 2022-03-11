@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using Microsoft.Data.Sqlite;
 
-namespace SimpleSelect.Tests.Helpers
+namespace AutocodeDB.Helpers
 {
     internal static class SqliteHelper
     {

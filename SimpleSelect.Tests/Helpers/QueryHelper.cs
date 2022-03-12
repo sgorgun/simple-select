@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -48,6 +49,7 @@ namespace AutocodeDB.Helpers
             return ComposeErrorMessage(query, null, message);
         }
 
+        public static bool IsQueryCorrect(IEnumerable<string> queries, Func<string, bool> isCorrect) => queries.Any(isCorrect);
         public static string RemoveComments(string rawData)
         {
             rawData = Regex.Replace(rawData, LineComments, "", RegexOptions.Multiline);

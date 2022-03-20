@@ -8,7 +8,7 @@ namespace AutocodeDB.Helpers
 {
     internal static class QueryHelper
     {
-        private const string BlockComments = @"/\*.*\*/";//@"/\*(.*?)\*/";
+        private const string BlockComments = @"/\*.*\*/";
         private const string LineComments = @"--(.*$?)";
         public static string GetQuery(string file)
         {
@@ -30,7 +30,6 @@ namespace AutocodeDB.Helpers
 
         public static string[] GetQueries(string[] files)
         {
-            StreamWriter writer = new StreamWriter("log.txt", true);
             for (int i = 0; i < files.Length; i++)
             {
                 files[i] = GetQuery(files[i]);

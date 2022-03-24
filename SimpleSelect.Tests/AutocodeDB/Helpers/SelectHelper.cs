@@ -11,11 +11,11 @@ namespace AutocodeDB.Helpers
     {
         private static readonly Regex SelectFromRegex = new Regex(@"\s*SELECT\s+[\w\s\.,\(\)*='\[\]_\-\>\<\!]*\s+FROM", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         private static readonly Regex AggregationFuncRegex = new Regex(@"((COUNT)|(AVG)|(SUM)|(MIN)|(MAX))\([\w\s\.,\(\)*='\[\]_\-\>\<\!]+\)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        private static readonly Regex JoinRegex = new Regex(@"\s*JOIN\s+([\s\w]+ON){1}\s+([\s\.\w]*[^=]){1}\s*=", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        private static readonly Regex InnerJoinRegex = new Regex(@"\s*INNER\s+JOIN\s+([\s\w]+ON){1}\s+([\s\.\w]*[^=]){1}\s*=", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static readonly Regex JoinRegex = new Regex(@"\s*JOIN\s+([\s\w \[ \] \.]+ON){1}\s+([\s\w \[ \] \.]*[^=]){1}\s*=", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static readonly Regex InnerJoinRegex = new Regex(@"\s*INNER\s+JOIN\s+([\s\w \[ \] \.]+ON){1}\s+([\s\.\w \[ \]]*[^=]){1}\s*=", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         private static readonly Regex LeftJoinRegex = new Regex(@"\s*LEFT\s+JOIN\s+[\w\s\.,\(\)*='\[\]_\-\>\<\!]*\s+ON[\w\s\.,\(\)*='\[\]_\-\>\<\!]*[^;]=", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        private static readonly Regex OrderByRegex = new Regex(@"ORDER\s+BY\s+\w+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        private static readonly Regex GroupByRegex = new Regex(@"GROUP\s+BY\s+\w+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static readonly Regex OrderByRegex = new Regex(@"ORDER\s+BY\s+[^\s]+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static readonly Regex GroupByRegex = new Regex(@"GROUP\s+BY\s+[^\s]+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         private static readonly Regex WhereRegex = new Regex(@"\s+WHERE\s+\w+", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         private static readonly Regex WhereIsNullRegex = new Regex(@"\s*WHERE\s+[\w\s\.,\(\)*='\[\]_\-\>\<\!]*((IS NULL)|(IS NOT NULL))", RegexOptions.Compiled | RegexOptions.IgnoreCase);
         private static readonly Regex UnionRegex = new Regex(@"\s+UNION\s+", RegexOptions.Compiled | RegexOptions.IgnoreCase);

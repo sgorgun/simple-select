@@ -9,10 +9,12 @@ namespace AutocodeDB.Helpers
 {
     public static class CreateTableHelper
     {
-        private static readonly Regex CreateRegExp = new Regex(@"^\s*CREATE\sTABLE");
-        private static readonly Regex PrimaryKeyRegExp = new Regex(@"\s+PRIMARY\s+KEY");
-        private static readonly Regex ForeignKeyRegExp = new Regex(@"\s+FOREIGN\s+KEY");
-        private static readonly Regex UniqueKeyRegExp = new Regex(@"\s+UNIQUE");
+        private static readonly Regex CreateRegExp = new Regex(@"^\s*CREATE\sTABLE", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static readonly Regex PrimaryKeyRegExp = new Regex(@"\s+PRIMARY\s+KEY", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static readonly Regex ForeignKeyRegExp = new Regex(@"\s+FOREIGN\s+KEY", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static readonly Regex UniqueKeyRegExp = new Regex(@"\s+UNIQUE", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static readonly Regex OnDeleteRegExp = new Regex(@"\s+ON\s+DELETE\s+CASCADE", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
         private static Dictionary<string, DbTable> _tableMap;
         
         public static void ValidateConstrainKeyIntegrity(string query, IEnumerable<string> queries)
@@ -33,10 +35,12 @@ namespace AutocodeDB.Helpers
         }
         
         public static IEnumerable<string> GetOnlyQueriesWithForeignKeys(IEnumerable<string> queries) => queries.Where(ContainsForeignKey);
-        public static bool ContainsCreateTableStatement(string query) => CreateRegExp.IsMatch(query.ToUpper());
-        public static bool ContainsPrimaryKey(string query) => PrimaryKeyRegExp.IsMatch(query.ToUpper());
-        public static bool ContainsForeignKey(string query) => ForeignKeyRegExp.IsMatch(query.ToUpper());
-        public static bool ContainsUniqueKey(string query) => UniqueKeyRegExp.IsMatch(query.ToUpper());
+        public static bool ContainsCreateTableStatement(string query) => CreateRegExp.IsMatch(query);
+        public static bool ContainsPrimaryKey(string query) => PrimaryKeyRegExp.IsMatch(query);
+        public static bool ContainsForeignKey(string query) => ForeignKeyRegExp.IsMatch(query);
+        public static bool ContainsUniqueKey(string query) => UniqueKeyRegExp.IsMatch(query);
+
+        public static bool ContainsOnDeleteCascade(string query) => OnDeleteRegExp.IsMatch(query);
 
         private static void LoadTables(IEnumerable<string> queries)
         {

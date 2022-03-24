@@ -8,7 +8,7 @@ namespace AutocodeDB.Helpers
 {
     internal static class QueryHelper
     {
-        private const string BlockComments = @"/\*.*\*/";
+        private const string BlockComments = @"([\s;]|^)(/\*[\s\S]*?(\*/))";
         private const string LineComments = @"--(.*$?)";
         public static string GetQuery(string file)
         {
